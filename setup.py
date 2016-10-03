@@ -30,5 +30,5 @@ setup(
     ],
     keywords='logistic regression machine learning',
     packages=find_packages(exclude=['contrib', 'docs', 'tests']),
-    install_requires=[],
+    install_requires=['numpy'],
 )
