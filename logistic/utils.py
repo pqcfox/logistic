@@ -1,8 +1,8 @@
 import numpy as np
 
 
-def gradient_descent(grad_func, m, alpha=0.01, epsilon=0.0000001):
-    theta = np.zeros(m)
+def gradient_descent(grad_func, m, alpha=1e-2, beta=1e-7, epsilon=1e-10):
+    theta = 2 * (np.random.rand(m) - 0.5) * beta
     while True:
         delta = alpha * grad_func(theta)
         theta -= delta
