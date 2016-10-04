@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def gradient_descent(cost_func, grad_func, m, alpha=0.01, epsilon=0.0000001):
+def gradient_descent(grad_func, m, alpha=0.01, epsilon=0.0000001):
     theta = np.zeros(m)
     while True:
         delta = alpha * grad_func(theta)

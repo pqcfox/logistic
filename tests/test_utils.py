@@ -43,7 +43,15 @@ def test_empty_hypothesis_is_empty():
 
 
 def test_gradient_descent_finds_convex_minimum():
-    cost = lambda x: (x[0] - 1) ** 2 + (x[1] - 1) ** 2
-    grad = lambda x: np.array([2 * (x[0] - 1), 2 * (x[0] - 1)])
-    result = gradient_descent(cost, grad, 2)
-    assert np.isclose(result, np.array([1, 1])).all()
+    # function is (x - 1) ** 2 + (y - 1) ** 2
+    grad = lambda x: np.array([2 * (x[0] - 1), 2 * (x[0] - 1)])  # parabola
+    assert np.isclose(gradient_descent(grad, 2), np.array([1, 1])).all()
+
+
+def test_gradient_descent_can_symmetry_break():
+    # function is (x + 1) ** 2 * (x - 1) ** 2 + y ** 2
+    grad = lambda x: np.array([4 * x[0] * (x[0] ** 2 - 1), 2 * x[1]])
+    upper_min = np.isclose(gradient_descent(grad, 2), np.array([1, 0])).all()
+    lower_min = np.isclose(gradient_descent(grad, 2), np.array([-1, 0])).all()
+    assert upper_min or lower_min
+    
