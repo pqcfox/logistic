@@ -6,8 +6,6 @@ def gradient_descent(grad_func, m, alpha=1e-2, beta=1e-7, epsilon=1e-10):
     while True:
         delta = alpha * grad_func(theta)
         theta -= delta
-        print(np.linalg.norm(delta))
-        print(theta)
         if np.linalg.norm(delta) < epsilon:
             break
     return theta
