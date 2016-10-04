@@ -1,6 +1,6 @@
 import numpy as np
 
-from logistic.utils import hypothesis, sigmoid
+from logistic.utils import sigmoid, hypothesis, gradient_descent
 
 
 def test_sigmoid_handles_small_values():
@@ -40,3 +40,10 @@ def test_hypothesis_works_on_arrays():
 
 def test_empty_hypothesis_is_empty():
     assert np.array_equal(hypothesis(np.array([]), np.array([])), np.array([]))
+
+
+def test_gradient_descent_finds_convex_minimum():
+    cost = lambda x: (x[0] - 1) ** 2 + (x[1] - 1) ** 2
+    grad = lambda x: np.array([2 * (x[0] - 1), 2 * (x[0] - 1)])
+    result = gradient_descent(cost, grad, 2)
+    assert np.isclose(result, np.array([1, 1])).all()

@@ -1,8 +1,16 @@
 import numpy as np
 
 
-def optimize(cost_func, grad_func):
-    pass
+def gradient_descent(cost_func, grad_func, m, alpha=0.01, epsilon=0.0000001):
+    theta = np.zeros(m)
+    while True:
+        delta = alpha * grad_func(theta)
+        theta -= delta
+        print(np.linalg.norm(delta))
+        print(theta)
+        if np.linalg.norm(delta) < epsilon:
+            break
+    return theta
 
 
 def sigmoid(x):

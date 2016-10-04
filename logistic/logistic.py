@@ -1,6 +1,6 @@
 import numpy as np
 
-from logistic.utils import optimize, hypothesis
+from logistic.utils import hypothesis, gradient_descent
 
 
 class Logistic:
