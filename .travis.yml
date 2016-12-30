@@ -5,8 +5,8 @@ python:
   - "3.4"
   - "3.5"
 install: 
-  pip install tox-travis
-  pip install --user -r requirements.txt
+  - pip install tox-travis
+  - pip install --user -r requirements.txt
 script: tox
 notifications:
   email: false
