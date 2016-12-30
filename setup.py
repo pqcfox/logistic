@@ -31,4 +31,5 @@ setup(
     keywords='logistic regression machine learning',
     packages=find_packages(exclude=['contrib', 'docs', 'tests']),
     install_requires=['numpy'],
+    tests_require=['scikit-learn'],
 )
