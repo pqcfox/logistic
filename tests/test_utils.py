@@ -43,18 +43,16 @@ def test_empty_hypothesis_is_empty():
 
 
 def test_gradient_descent_finds_convex_minimum(random):
-    # function is (x - 1) ** 2 + (y - 1) ** 2
-    grad = lambda x: np.array([2 * (x[0] - 1), 2 * (x[0] - 1)])  # parabola
-    assert np.isclose(gradient_descent(grad, 2), np.array([1, 1])).all()
+    cost = lambda x: (x[0] - 1) ** 2 + (x[1] - 1) ** 2
+    grad = lambda x: np.array([2 * (x[0] - 1), 2 * (x[1] - 1)])
+    theta = gradient_descent(cost, grad, 2, alpha=1e-3)
+    assert np.isclose(theta, np.array([1, 1]), atol=5e-2).all()
 
 
 def test_gradient_descent_can_symmetry_break(random):
-    # function is (x + 1) ** 2 * (x - 1) ** 2 + y ** 2
+    cost = lambda x: (x[0] + 1) ** 2 * (x[0] - 1) ** 2 + x[1] ** 2
     grad = lambda x: np.array([4 * x[0] * (x[0] ** 2 - 1), 2 * x[1]])
-    result = gradient_descent(grad, 2)
-    print(result)
-    upper_min = np.isclose(result, np.array([1, 0])).all()
-    lower_min = np.isclose(result, np.array([-1, 0])).all()
-    print(upper_min)
-    print(lower_min)
+    theta = gradient_descent(cost, grad, 2, alpha=1e-3, beta=1e-1)
+    upper_min = np.isclose(theta, np.array([1, 0]), atol=5e-2).all()
+    lower_min = np.isclose(theta, np.array([-1, 0]), atol=5e-2).all()
     assert upper_min or lower_min

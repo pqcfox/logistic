@@ -7,11 +7,12 @@ class Logistic:
     def fit(self, X, y):
         cost_func = self.cost(X, y)
         grad_func = self.grad(X, y)
-        self.theta = optimize(cost_func, grad_func)
+        self.theta = gradient_descent(cost_func, grad_func, X.shape[1])
         return self
 
     def predict(self, X):
-        return np.dot(self.theta, np.transpose(X)) > 0.5
+        values = np.dot(self.theta, np.transpose(X)) > 0.5
+        return values.astype(int)
 
     @staticmethod
     def cost(X, y):
